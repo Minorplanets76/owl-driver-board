@@ -2,6 +2,8 @@ The OWL Driver Board is a solid-state relay HAT for the Raspberry Pi. It was
 developed for use with the [Open Weed Locator](https://github.com/geezacoleman/OpenWeedLocator) 
 but is suitable for any automotive or agricultural application.
 
+### This fork provides an alternate board trimming down on features, attempting cheaper single sinded construction.
+
 It allows a Raspberry Pi to drive 4x 2A outputs in any 12V or 24V system. It is
 able to tolerate high levels of electrical noise, reverse polarity, short
 circuit conditions and over voltage.
@@ -9,15 +11,15 @@ circuit conditions and over voltage.
  * Working voltage 7-26V
  * 4x fused outputs, each max. 2A, high-side switched
  * 1x fused input max. 7A
- * Integrated PCA9685 PWM driver allows optional PWM control, compatible with Adafruit PCA9675 Python libraries
+ * ~Integrated PCA9685 PWM driver allows optional PWM control, compatible with Adafruit PCA9675 Python libraries~
  * Outputs can be driven in multiple ways, configurable by a header
    * From Raspberry PI GPIOs
-   * From an on-board PCA9685 PWM driver
-   * Directly from external control, via wires to a header. Control inputs are tolerant up to 26V.
+   * ~From an on-board PCA9685 PWM driver~
+   * ~Directly from external control, via wires to a header. Control inputs are tolerant up to 26V.~
  * Buck converter generates 5V @ 2A to power the Raspberry Pi
- * Input and output connectors use WAGO spring terminals
+ * ~Input and output connectors use WAGO spring terminals~
  * Input and outputs are fused, with protection against over-voltage, reverse polarity, and inductive spikes
- * LED indication of blown fuses
+ * LED indication of _blown fuses_.  Don't make the mistake I made, thinking that were power indication LED's!:blush:
 
 The board aims to be difficult to misconfigure and hard to damage.
 Self-resetting polyfuses on the input and outputs limit current, and TVS+Schottky
@@ -29,27 +31,27 @@ extends to communication buses with the Raspberry Pi.
 
 This open hardware project is Copyright (c) 2022 Guy Coleman and Patrick Coleman, and is released under an MIT license.
 
-# Stacking
+# ~Stacking~
 
-The HATs may be stacked and controlled with the PCA9685.
+~The HATs may be stacked and controlled with the PCA9685.~  Nope
 
-If needed, input power can connected together in the stack via optional header
+~If needed, input power can connected together in the stack via optional header
 J6 (so only one pair of wires to input WAGO connector J3 for power to the whole
 stack is needed). Note this power bus will support at most 6A, so consider
 connecting power in parallel to WAGO connector J3 if your current requirements
-exceed this.
+exceed this.~
 
-When stacked and in GPIO mode, turning on output #1 from the Raspberry Pi will
-turn on all #1 outputs in the stack.
+~When stacked and in GPIO mode, turning on output #1 from the Raspberry Pi will
+turn on all #1 outputs in the stack.~
 
-For individual control of all outputs in the stack
-1. Set jumpers on header J6 to control outputs via the PCA9685 (the "PWM" setting).
-1. Using a soldering iron, bridge one "address" jumper on each board in the stack, so each board has a unique binary I2C address.
-1. Use the Adafruit PCA9685 Python library on the Raspberry Pi to communicate with each board via the chosen I2C addresses and control outputs individually.
+~For individual control of all outputs in the stack~
+~1. Set jumpers on header J6 to control outputs via the PCA9685 (the "PWM" setting).~
+~1. Using a soldering iron, bridge one "address" jumper on each board in the stack, so each board has a unique binary I2C address.~
+~1. Use the Adafruit PCA9685 Python library on the Raspberry Pi to communicate with each board via the chosen I2C addresses and control outputs individually.~
 
-Pi pin 22 (GPIO25) is connected to the PCA9685 Output Enable pin. Driving this
+~Pi pin 22 (GPIO25) is connected to the PCA9685 Output Enable pin. Driving this
 pin high on the Pi will disable all outputs in the stack (eg, for a software
-emergency stop). It must be driven low for normal operation.
+emergency stop). It must be driven low for normal operation.~
 
 # Manufacturing
 
